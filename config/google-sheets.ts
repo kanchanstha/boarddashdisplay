@@ -1,7 +1,7 @@
 // Google Sheets Configuration
 export const GOOGLE_SHEETS_CONFIG = {
   // Your Google Sheets ID from the URL
-  SPREADSHEET_ID: process.env.GOOGLE_SHEETS_SPREADSHEET_ID || '1dko2aRGvGx8hiTrL6NlIRoc8umVfLilhLL0iuMCn5G0',
+  SPREADSHEET_ID: process.env.GOOGLE_SHEETS_SPREADSHEET_ID || '',
   
   // Range to fetch data (A:F for Name, Service Name, Phone, Email, Requested Date, Requested Time)
   DEFAULT_RANGE: process.env.GOOGLE_SHEETS_DEFAULT_RANGE || 'Sheet1!A:F',
@@ -25,11 +25,11 @@ export const GOOGLE_SHEETS_CONFIG = {
     API_KEY: process.env.GOOGLE_SHEETS_API_KEY || '',
     
     // Service Account settings (primary method for private sheets)
-    SERVICE_ACCOUNT_EMAIL: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || 'booking-dashboard-service-acco@constant-rig-461003-q4.iam.gserviceaccount.com',
+    SERVICE_ACCOUNT_EMAIL: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || '',
     SERVICE_ACCOUNT_PRIVATE_KEY: process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY || '',
     
-    // Service Account JSON file path
-    SERVICE_ACCOUNT_KEY_FILE: process.env.GOOGLE_SHEETS_SERVICE_ACCOUNT_KEY_FILE || './key.json',
+    // Service Account JSON file path (DEPRECATED - use environment variables instead)
+    SERVICE_ACCOUNT_KEY_FILE: process.env.GOOGLE_SHEETS_SERVICE_ACCOUNT_KEY_FILE || '',
   },
   
   // Key metrics columns mapping

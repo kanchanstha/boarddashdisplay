@@ -16,7 +16,7 @@ export interface GoogleSheetRow {
 // Define the scope - what permissions you're requesting
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly'];
 
-// Create the full path to your key file
+// Create the full path to your key file (DEPRECATED - use environment variables instead)
 const KEY_FILE_PATH = path.join(process.cwd(), 'key.json');
 
 // Service Account method for private Google Sheets (most secure)
