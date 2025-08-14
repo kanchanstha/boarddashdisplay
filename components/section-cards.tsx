@@ -1,6 +1,6 @@
 "use client"
 
-import { IconTrendingDown, IconTrendingUp, IconCalendar, IconClock, IconCheck, IconUsers } from "@tabler/icons-react"
+import { IconCalendar, IconClock, IconCheck, IconUsers } from "@tabler/icons-react"
 import { useEffect, useState } from "react"
 
 import { Badge } from "@/components/ui/badge"

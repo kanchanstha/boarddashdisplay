@@ -6,14 +6,12 @@ import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
 import { useIsMobile } from "@/hooks/use-mobile"
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
@@ -65,19 +63,7 @@ const chartData = [
   { date: "2024-04-30", desktop: 454, mobile: 380 },
 ]
 
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-  },
-  desktop: {
-    label: "Desktop",
-    color: "var(--primary)",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "var(--primary)",
-  },
-} satisfies ChartConfig
+
 
 export function ChartAreaInteractive() {
   const isMobile = useIsMobile()
@@ -103,8 +89,73 @@ export function ChartAreaInteractive() {
     return date >= startDate
   })
 
-//   return (
-    
-    
-//   )
-// }
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Website Traffic</CardTitle>
+        <CardDescription>
+          Monitor your website traffic and visitor analytics
+        </CardDescription>
+        <div className="flex items-center gap-2">
+          <Select value={timeRange} onValueChange={setTimeRange}>
+            <SelectTrigger className="w-[120px]">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="7d">Last 7 days</SelectItem>
+              <SelectItem value="30d">Last 30 days</SelectItem>
+              <SelectItem value="90d">Last 90 days</SelectItem>
+            </SelectContent>
+          </Select>
+          <ToggleGroup type="single" value={timeRange} onValueChange={setTimeRange}>
+            <ToggleGroupItem value="7d" aria-label="7 days">7D</ToggleGroupItem>
+            <ToggleGroupItem value="30d" aria-label="30 days">30D</ToggleGroupItem>
+            <ToggleGroupItem value="90d" aria-label="90 days">90D</ToggleGroupItem>
+          </ToggleGroup>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <ChartContainer config={{
+          desktop: { color: "var(--primary)" },
+          mobile: { color: "var(--primary)" }
+        }}>
+          <AreaChart data={filteredData}>
+            <defs>
+              <linearGradient id="desktop" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.8} />
+                <stop offset="95%" stopColor="var(--primary)" stopOpacity={0.1} />
+              </linearGradient>
+              <linearGradient id="mobile" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="var(--primary)" stopOpacity={0.6} />
+                <stop offset="95%" stopColor="var(--primary)" stopOpacity={0.1} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis 
+              dataKey="date" 
+              tickFormatter={(value) => {
+                const date = new Date(value)
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+              }}
+            />
+            <Area
+              type="monotone"
+              dataKey="desktop"
+              stroke="var(--primary)"
+              fill="url(#desktop)"
+              strokeWidth={2}
+            />
+            <Area
+              type="monotone"
+              dataKey="mobile"
+              stroke="var(--primary)"
+              fill="url(#mobile)"
+              strokeWidth={2}
+            />
+            <ChartTooltip content={<ChartTooltipContent />} />
+          </AreaChart>
+        </ChartContainer>
+      </CardContent>
+    </Card>
+  )
+}

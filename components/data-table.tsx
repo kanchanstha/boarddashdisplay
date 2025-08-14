@@ -21,7 +21,6 @@ import {
 } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
 import {
-  IconChevronDown,
   IconChevronLeft,
   IconChevronRight,
   IconChevronsLeft,
@@ -29,9 +28,7 @@ import {
   IconCircleCheckFilled,
   IconDotsVertical,
   IconGripVertical,
-  IconLayoutColumns,
   IconLoader,
-  IconPlus,
   IconTrendingUp,
 } from "@tabler/icons-react"
 import {
@@ -102,8 +99,6 @@ import {
 import {
   Tabs,
   TabsContent,
-  TabsList,
-  TabsTrigger,
 } from "@/components/ui/tabs"
 
 export const schema = z.object({

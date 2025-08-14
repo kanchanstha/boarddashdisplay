@@ -1,7 +1,6 @@
 import { GoogleAuth } from 'google-auth-library';
 import { google } from 'googleapis';
 import path from 'path';
-import { GOOGLE_SHEETS_CONFIG } from '@/config/google-sheets';
 
 export interface GoogleSheetRow {
   id: number;
@@ -48,7 +47,7 @@ export async function getGoogleSheetsDataWithServiceAccount(spreadsheetId: strin
     
     // Get the authenticated client
     console.log('🔄 Getting authenticated client...');
-    const authClient = await auth.getClient();
+    await auth.getClient();
     console.log('✅ Service account authenticated successfully');
     
     // Get the project ID and email from the auth client
@@ -110,7 +109,7 @@ export async function getGoogleSheetsDataWithServiceAccount(spreadsheetId: strin
 }
 
 // Primary method using Google Sheets CSV export (most reliable for public sheets)
-export async function getPublicGoogleSheetsData(spreadsheetId: string, range: string): Promise<GoogleSheetRow[]> {
+export async function getPublicGoogleSheetsData(spreadsheetId: string): Promise<GoogleSheetRow[]> {
   try {
     // Use the CSV export URL which is more reliable for public sheets
     const url = `https://docs.google.com/spreadsheets/d/${spreadsheetId}/export?format=csv&gid=0`;

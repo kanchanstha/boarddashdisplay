@@ -162,7 +162,7 @@ export function GoogleSheetsDataTable() {
     refreshInterval: 30000, // 30 seconds (reduced due to server-side caching)
   });
 
-  // Auto-refresh on component mount - using empty dependency array to prevent infinite re-renders
+  // Auto-refresh on component mount
   useEffect(() => {
     if (isConfigured && autoRefresh) {
       // Initial load
@@ -175,7 +175,7 @@ export function GoogleSheetsDataTable() {
 
       return () => clearInterval(interval);
     }
-  }, []); // Empty dependency array to prevent infinite re-renders
+  }, [isConfigured, autoRefresh, refetch]); // Proper dependencies
 
   const handleRefresh = () => {
     refetch();

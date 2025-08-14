@@ -8,6 +8,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { env, validateEnvironment } from "@/config/env"
+// Form data type (matching the one in google-sheets-config.tsx)
+type FormData = {
+  apiKey: string
+  webhookUrl: string
+  spreadsheetId: string
+  sheetRange: string
+}
 
 export default function SettingsPage() {
   const [configStatus, setConfigStatus] = useState({
@@ -15,13 +22,13 @@ export default function SettingsPage() {
     webhook: env.hasWebhookUrl,
   })
 
-  const handleGoogleSheetsConfigUpdate = (config: any) => {
+  const handleGoogleSheetsConfigUpdate = (config: FormData) => {
     console.log('Google Sheets config updated:', config)
     setConfigStatus(prev => ({ ...prev, googleSheets: true }))
     // In a real app, you would save this to your backend or local storage
   }
 
-  const handleGoogleSheetsTestConnection = async (config: any): Promise<boolean> => {
+  const handleGoogleSheetsTestConnection = async (config: FormData): Promise<boolean> => {
     try {
       // Test the Google Sheets connection
       const response = await fetch(`/api/google-sheets?spreadsheetId=${config.spreadsheetId}&range=${config.sheetRange}&public=false`)

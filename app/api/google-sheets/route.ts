@@ -27,14 +27,14 @@ export async function GET(request: NextRequest) {
     // Try multiple methods in order of preference
     const methods = usePublic ? [
       // For public sheets, try public methods first
-      { name: 'CSV Export', fn: () => getPublicGoogleSheetsData(spreadsheetId, range) },
+      { name: 'CSV Export', fn: () => getPublicGoogleSheetsData(spreadsheetId) },
       { name: 'JSON Export', fn: () => getGoogleSheetsDataAsJson(spreadsheetId) },
       { name: 'API Key', fn: () => getGoogleSheetsDataWithApiKey(spreadsheetId, range) }
     ] : [
       // For private sheets, try service account first (most secure)
       { name: 'Service Account', fn: () => getGoogleSheetsDataWithServiceAccount(spreadsheetId, range) },
       { name: 'API Key', fn: () => getGoogleSheetsDataWithApiKey(spreadsheetId, range) },
-      { name: 'CSV Export', fn: () => getPublicGoogleSheetsData(spreadsheetId, range) },
+      { name: 'CSV Export', fn: () => getPublicGoogleSheetsData(spreadsheetId) },
       { name: 'JSON Export', fn: () => getGoogleSheetsDataAsJson(spreadsheetId) }
     ];
 
